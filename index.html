@@ -3,73 +3,78 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Barra Jirau Energia - ZERO PAUSA 🎄</title>
+  <title>Tema Natalino Mágico 🎄✨</title>
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
-    
-    html {
-      overflow-x: hidden;
-    }
-    
-    /* Esconde todas as scrollbars */
-    html, body {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    
-    html::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-      width: 0;
-      height: 0;
-      display: none;
-    }
-    
+
     :root {
-      --speed: 90s;
-      --bar-height: 80px;
-      --radius: 0;
       --christmas-gold: #ffd700;
-      --christmas-red: #c41e3a;
-      --christmas-green: #0f7f4f;
+      --christmas-red: #ff3838;
+      --christmas-green: #00ff88;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: radial-gradient(ellipse at center, #1a0f2e 0%, #0a0612 100%);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       overflow: hidden;
       position: relative;
     }
 
+    /* Imagem de fundo com movimento */
+    .background-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.4;
+      z-index: 0;
+      filter: brightness(0.9) contrast(1.1);
+      animation: subtle-zoom 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes subtle-zoom {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.1);
+      }
+    }
+
     /* Overlay com gradiente animado */
-    body::before {
-      content: '';
+    .animated-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 80%, rgba(255, 56, 56, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.06) 0%, transparent 60%);
+        radial-gradient(circle at 20% 80%, rgba(255, 56, 56, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 136, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 60%);
       z-index: 1;
       animation: overlay-shift 20s ease-in-out infinite alternate;
-      pointer-events: none;
     }
 
     @keyframes overlay-shift {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(30px, -30px); }
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(30px, -30px);
+      }
     }
 
-    /* Neve caindo */
+    /* Neve caindo - melhorada */
     .snowflakes {
       position: fixed;
       top: 0;
@@ -90,7 +95,9 @@
       opacity: 0.9;
       text-shadow: 
         0 0 5px rgba(255, 255, 255, 0.8),
-        0 0 10px rgba(255, 255, 255, 0.6);
+        0 0 10px rgba(255, 255, 255, 0.6),
+        0 0 15px rgba(173, 216, 255, 0.4);
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
     }
 
     @keyframes fall {
@@ -99,12 +106,47 @@
         opacity: 0;
         transform: translateX(0) rotate(0deg);
       }
-      10% { opacity: 1; }
-      90% { opacity: 0.8; }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 0.8;
+      }
       100% {
         top: 110%;
         opacity: 0;
         transform: translateX(100px) rotate(360deg);
+      }
+    }
+
+    /* Fogos de artifício dourados */
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .firework {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      animation: explode 1.5s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0);
       }
     }
 
@@ -140,255 +182,317 @@
       }
     }
 
-    /* Partículas douradas */
-    .golden-particles {
+    /* Partículas mágicas coloridas */
+    .magic-particles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 3;
+      z-index: 50;
     }
 
-    .golden-particle {
+    .magic-particle {
       position: absolute;
       width: 6px;
       height: 6px;
-      background: var(--christmas-gold);
       border-radius: 50%;
-      box-shadow: 0 0 20px var(--christmas-gold);
-      animation: float-particle linear infinite;
+      animation: float-magic linear infinite;
       filter: blur(1px);
     }
 
-    @keyframes float-particle {
+    @keyframes float-magic {
       0% {
         opacity: 0;
-        transform: translateY(100vh) scale(0);
+        transform: translateY(100vh) scale(0) rotate(0deg);
       }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
       100% {
         opacity: 0;
-        transform: translateY(-20vh) scale(1.5);
+        transform: translateY(-20vh) scale(1.5) rotate(720deg);
       }
     }
 
-    .wrap {
-      width: 100%;
-      max-width: 100vw;
-      overflow: hidden;
-      position: relative;
-      z-index: 10;
-    }
-
-    .bar {
-      height: var(--bar-height);
-      width: 100%;
-      border-radius: var(--radius);
-      box-shadow: 
-        0 15px 35px rgba(0,0,0,.8), 
-        0 0 40px rgba(255, 215, 0, 0.3),
-        inset 0 0 0 3px rgba(255, 215, 0, 0.3);
-      background: linear-gradient(135deg, 
-        rgba(196, 30, 58, 0.9) 0%, 
-        rgba(139, 26, 46, 0.9) 50%,
-        rgba(15, 127, 79, 0.9) 100%
-      );
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 3px solid var(--christmas-gold);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    /* Brilho pulsante na barra */
-    .bar::before {
-      content: '';
-      position: absolute;
+    /* Aurora boreal natalina */
+    .aurora {
+      position: fixed;
       top: 0;
-      left: -100%;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 215, 0, 0.3), 
-        transparent
-      );
-      animation: shimmer 3s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 200%; }
-    }
-    
-    .scroll-container {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-      animation: scroll var(--speed) linear infinite;
-    }
-    
-    .message-part {
-      font-weight: 900;
-      font-size: 70px;
-      color: #ffffff;
-      text-shadow: 
-        3px 3px 6px rgba(0,0,0,0.9),
-        0px 0px 15px rgba(255, 215, 0, 0.5),
-        0px 0px 30px rgba(255, 215, 0, 0.3);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-family: 'Arial Black', Arial, sans-serif;
-      line-height: 1.2;
-      padding-right: 500px;
-    }
-    
-    .highlight {
-      font-size: 70px;
-      color: var(--christmas-gold);
-      text-shadow: 
-        3px 3px 6px rgba(0,0,0,1),
-        0px 0px 20px rgba(255, 255, 0, 0.8),
-        0px 0px 40px rgba(255, 255, 0, 0.5);
-      animation: glow-text 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow-text {
-      0% {
-        text-shadow: 
-          3px 3px 6px rgba(0,0,0,1),
-          0px 0px 20px rgba(255, 255, 0, 0.8),
-          0px 0px 40px rgba(255, 255, 0, 0.5);
-      }
-      100% {
-        text-shadow: 
-          3px 3px 6px rgba(0,0,0,1),
-          0px 0px 30px rgba(255, 255, 0, 1),
-          0px 0px 60px rgba(255, 255, 0, 0.8);
-      }
-    }
-    
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    
-    @media (prefers-reduced-motion: reduce) {
-      .scroll-container { animation: none; }
-    }
-
-    @media (max-width: 768px) {
-      .message-part {
-        font-size: 24px;
-        letter-spacing: 2px;
-        padding-right: 100px;
-      }
-      .highlight {
-        font-size: 32px;
-      }
-      :root {
-        --bar-height: 60px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .message-part {
-        font-size: 18px;
-        letter-spacing: 1.5px;
-        padding-right: 80px;
-      }
-      .highlight {
-        font-size: 24px;
-      }
-      :root {
-        --bar-height: 50px;
-      }
-    }
-
-    .bar::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      box-shadow: 
-        inset 0 0 30px rgba(255, 215, 0, 0.1), 
-        inset 0 0 1px rgba(255, 255, 255, 0.2);
+      background: 
+        linear-gradient(180deg, 
+          rgba(0, 255, 136, 0.08) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(255, 56, 56, 0.08) 100%
+        );
+      z-index: 1;
+      animation: aurora-wave 15s ease-in-out infinite;
       pointer-events: none;
+      opacity: 0.7;
     }
 
-    /* Luzes de natal piscando na barra */
-    .christmas-lights-bar {
-      position: absolute;
+    @keyframes aurora-wave {
+      0%, 100% {
+        transform: skewY(0deg) translateX(0);
+        opacity: 0.5;
+      }
+      25% {
+        transform: skewY(2deg) translateX(20px);
+        opacity: 0.8;
+      }
+      50% {
+        transform: skewY(-1deg) translateX(-10px);
+        opacity: 0.6;
+      }
+      75% {
+        transform: skewY(1deg) translateX(15px);
+        opacity: 0.9;
+      }
+    }
+
+    /* Brilhos flutuantes melhorados */
+    .golden-orbs {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 1;
+      z-index: 40;
     }
 
-    .bar-light {
+    .golden-orb {
       position: absolute;
       width: 8px;
       height: 8px;
+      background: radial-gradient(circle, var(--christmas-gold) 0%, transparent 70%);
       border-radius: 50%;
-      animation: blink-light 2s ease-in-out infinite;
+      box-shadow: 
+        0 0 20px var(--christmas-gold),
+        0 0 40px var(--christmas-gold),
+        0 0 60px rgba(255, 215, 0, 0.5);
+      animation: float-orb linear infinite;
+      filter: blur(2px);
     }
 
-    @keyframes blink-light {
+    @keyframes float-orb {
+      0% {
+        opacity: 0;
+        transform: translateY(0) translateX(0) scale(0);
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100vh) translateX(50px) scale(2);
+      }
+    }
+
+    /* Pulso central épico */
+    .epic-center {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, 
+        rgba(255, 215, 0, 0.2) 0%, 
+        rgba(255, 56, 56, 0.1) 30%,
+        rgba(0, 255, 136, 0.08) 60%,
+        transparent 100%
+      );
+      border-radius: 50%;
+      z-index: 1;
+      animation: epic-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes epic-pulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0.8;
+      }
+    }
+
+    /* Raios rotativos melhorados */
+    .rotating-rays {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      pointer-events: none;
+      animation: rays-rotation 40s linear infinite;
+    }
+
+    .ray {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3px;
+      height: 50%;
+      background: linear-gradient(to bottom, 
+        rgba(255, 215, 0, 0.3) 0%, 
+        rgba(255, 215, 0, 0.1) 50%,
+        transparent 100%
+      );
+      transform-origin: top center;
+      filter: blur(2px);
+    }
+
+    .ray:nth-child(1) { transform: rotate(0deg); }
+    .ray:nth-child(2) { transform: rotate(45deg); }
+    .ray:nth-child(3) { transform: rotate(90deg); }
+    .ray:nth-child(4) { transform: rotate(135deg); }
+    .ray:nth-child(5) { transform: rotate(180deg); }
+    .ray:nth-child(6) { transform: rotate(225deg); }
+    .ray:nth-child(7) { transform: rotate(270deg); }
+    .ray:nth-child(8) { transform: rotate(315deg); }
+
+    @keyframes rays-rotation {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    /* Confete caindo */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 80;
+      overflow: hidden;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: confetti-fall linear infinite;
+    }
+
+    @keyframes confetti-fall {
+      0% {
+        top: -20px;
+        opacity: 1;
+        transform: rotateZ(0deg);
+      }
+      100% {
+        top: 100vh;
+        opacity: 0.5;
+        transform: rotateZ(720deg);
+      }
+    }
+
+    /* Luzes de natal piscando nas bordas */
+    .christmas-lights {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 90;
+    }
+
+    .light {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
       0%, 100% {
         opacity: 0.3;
         transform: scale(0.8);
       }
       50% {
         opacity: 1;
-        transform: scale(1.2);
+        transform: scale(1.3);
       }
     }
   </style>
 </head>
 <body>
+  <!-- Imagem de fundo -->
+  <div class="background-image"></div>
+
+  <!-- Overlay animado -->
+  <div class="animated-overlay"></div>
+
+  <!-- Aurora boreal -->
+  <div class="aurora"></div>
+
+  <!-- Pulso central épico -->
+  <div class="epic-center"></div>
+
+  <!-- Raios rotativos -->
+  <div class="rotating-rays">
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+    <div class="ray"></div>
+  </div>
+
   <!-- Estrelas -->
   <div class="stars" id="stars"></div>
 
-  <!-- Partículas douradas -->
-  <div class="golden-particles" id="goldenParticles"></div>
+  <!-- Partículas mágicas -->
+  <div class="magic-particles" id="magicParticles"></div>
+
+  <!-- Orbes dourados -->
+  <div class="golden-orbs" id="goldenOrbs"></div>
+
+  <!-- Confete -->
+  <div class="confetti-container" id="confetti"></div>
+
+  <!-- Luzes de natal -->
+  <div class="christmas-lights" id="christmasLights"></div>
+
+  <!-- Fogos de artifício -->
+  <div class="fireworks" id="fireworks"></div>
 
   <!-- Neve caindo -->
   <div class="snowflakes" id="snowflakes"></div>
 
-  <main class="wrap">
-    <div class="bar">
-      <!-- Luzes de natal na barra -->
-      <div class="christmas-lights-bar" id="barLights"></div>
-
-      <div class="scroll-container">
-        <!-- PRIMEIRA CÓPIA -->
-        <div class="message-part">
-          🎄 ALIMENTAÇÃO SAUDÁVEL, 💪 CORPO E MENTE SAUDÁVEIS! 🎅 NÃO DESPERDICE COMIDA, 🍽️ SE PRECISAR, PODE REPETIR O PRATO, ❌ <span class="highlight">COM EXCEÇÃO DA PROTEÍNA E SOBREMESA!</span> 🥩🍰 ✨
-        </div>
-        
-        <!-- SEGUNDA CÓPIA -->
-        <div class="message-part">
-          🎄 ALIMENTAÇÃO SAUDÁVEL, 💪 CORPO E MENTE SAUDÁVEIS! 🎅 NÃO DESPERDICE COMIDA, 🍽️ SE PRECISAR, PODE REPETIR O PRATO, ❌ <span class="highlight">COM EXCEÇÃO DA PROTEÍNA E SOBREMESA!</span> 🥩🍰 ✨
-        </div>
-      </div>
-    </div>
-  </main>
-
   <script>
-    // Criar neve
+    // Criar neve melhorada
     function createSnowflakes() {
       const container = document.getElementById('snowflakes');
-      const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❇'];
-      const numberOfSnowflakes = 60;
+      const snowflakeChars = ['❄', '❅', '❆', '✻', '✼', '❇', '❈', '❉', '⛄', '🎄'];
+      const numberOfSnowflakes = 100;
 
       for (let i = 0; i < numberOfSnowflakes; i++) {
         const snowflake = document.createElement('div');
@@ -405,7 +509,7 @@
     // Criar estrelas
     function createStars() {
       const container = document.getElementById('stars');
-      const numberOfStars = 80;
+      const numberOfStars = 100;
 
       for (let i = 0; i < numberOfStars; i++) {
         const star = document.createElement('div');
@@ -418,46 +522,138 @@
       }
     }
 
-    // Criar partículas douradas
-    function createGoldenParticles() {
-      const container = document.getElementById('goldenParticles');
-      const numberOfParticles = 25;
+    // Criar partículas mágicas
+    function createMagicParticles() {
+      const container = document.getElementById('magicParticles');
+      const colors = ['#ffd700', '#ff3838', '#00ff88', '#ff69b4', '#00ffff'];
+      const numberOfParticles = 40;
 
       for (let i = 0; i < numberOfParticles; i++) {
         const particle = document.createElement('div');
-        particle.classList.add('golden-particle');
+        particle.classList.add('magic-particle');
         particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDuration = (Math.random() * 5 + 8) + 's';
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.boxShadow = `0 0 20px ${colors[Math.floor(Math.random() * colors.length)]}`;
+        particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
         particle.style.animationDelay = Math.random() * 5 + 's';
         container.appendChild(particle);
       }
     }
 
-    // Criar luzes na barra
-    function createBarLights() {
-      const container = document.getElementById('barLights');
-      const colors = ['#ffd700', '#ff3838', '#00ff88'];
-      const numberOfLights = 20;
+    // Criar orbes dourados
+    function createGoldenOrbs() {
+      const container = document.getElementById('goldenOrbs');
+      const numberOfOrbs = 25;
+
+      for (let i = 0; i < numberOfOrbs; i++) {
+        const orb = document.createElement('div');
+        orb.classList.add('golden-orb');
+        orb.style.left = Math.random() * 100 + '%';
+        orb.style.animationDuration = (Math.random() * 5 + 8) + 's';
+        orb.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(orb);
+      }
+    }
+
+    // Criar confete
+    function createConfetti() {
+      const container = document.getElementById('confetti');
+      const colors = ['#ffd700', '#ff3838', '#00ff88', '#ff69b4', '#00ffff', '#ff8c00'];
+      const shapes = ['square', 'circle', 'triangle'];
+      const numberOfConfetti = 50;
+
+      for (let i = 0; i < numberOfConfetti; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        confetti.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(confetti);
+      }
+    }
+
+    // Criar luzes de natal nas bordas
+    function createChristmasLights() {
+      const container = document.getElementById('christmasLights');
+      const colors = ['#ffd700', '#ff3838', '#00ff88', '#0088ff', '#ff00ff'];
+      const numberOfLights = 30;
 
       for (let i = 0; i < numberOfLights; i++) {
         const light = document.createElement('div');
-        light.classList.add('bar-light');
-        light.style.left = (i * (100 / numberOfLights)) + '%';
-        light.style.top = Math.random() > 0.5 ? '5px' : 'calc(100% - 13px)';
+        light.classList.add('light');
+        
+        // Posicionar nas bordas
+        const position = Math.floor(Math.random() * 4);
+        if (position === 0) { // Topo
+          light.style.top = '10px';
+          light.style.left = Math.random() * 100 + '%';
+        } else if (position === 1) { // Direita
+          light.style.right = '10px';
+          light.style.top = Math.random() * 100 + '%';
+        } else if (position === 2) { // Baixo
+          light.style.bottom = '10px';
+          light.style.left = Math.random() * 100 + '%';
+        } else { // Esquerda
+          light.style.left = '10px';
+          light.style.top = Math.random() * 100 + '%';
+        }
         
         const color = colors[Math.floor(Math.random() * colors.length)];
         light.style.backgroundColor = color;
-        light.style.boxShadow = `0 0 15px ${color}`;
-        light.style.animationDelay = (i * 0.1) + 's';
+        light.style.boxShadow = `0 0 20px ${color}, 0 0 40px ${color}`;
+        light.style.animationDelay = Math.random() * 2 + 's';
         container.appendChild(light);
       }
     }
 
-    // Inicializar
+    // Criar fogos de artifício
+    function createFirework(x, y) {
+      const container = document.getElementById('fireworks');
+      const colors = ['#ffd700', '#ff3838', '#00ff88', '#ff69b4', '#00ffff'];
+      const numberOfParticles = 30;
+      
+      for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('firework');
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.backgroundColor = color;
+        particle.style.boxShadow = `0 0 10px ${color}`;
+        
+        const angle = (Math.PI * 2 * i) / numberOfParticles;
+        const velocity = Math.random() * 100 + 100;
+        const tx = Math.cos(angle) * velocity;
+        const ty = Math.sin(angle) * velocity;
+        
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        
+        container.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 1500);
+      }
+    }
+
+    // Fogos aleatórios
+    function randomFireworks() {
+      setInterval(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight * 0.6;
+        createFirework(x, y);
+      }, 3000);
+    }
+
+    // Inicializar tudo
     createSnowflakes();
     createStars();
-    createGoldenParticles();
-    createBarLights();
+    createMagicParticles();
+    createGoldenOrbs();
+    createConfetti();
+    createChristmasLights();
+    randomFireworks();
   </script>
 </body>
 </html>
